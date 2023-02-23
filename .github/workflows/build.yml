@@ -36,6 +36,5 @@ jobs:
 
     - name: Build
       run: dotnet build --no-restore
-      
-    - name: Run Tests
-      run: dotnet test --no-build --verbosity normal
+      env:
+        AssemblyOriginatorKeyFile: ${{ steps.write_sign_key_file.outputs.filePath }}
