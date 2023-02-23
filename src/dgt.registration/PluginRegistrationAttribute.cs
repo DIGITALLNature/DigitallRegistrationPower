@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DGT.Registrations
+namespace dgt.registration
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class PluginRegistrationAttribute : Attribute

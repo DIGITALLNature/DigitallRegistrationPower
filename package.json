@@ -31,7 +31,7 @@
           "@semantic-release/github"
       ],
       "includeSymbols": true,
-      "projectPath": "src/dgt.registrations/DGT.Registrations.csproj",
+      "projectPath": "src/dgt.registration/dgt.registration.csproj",
       "npmPublish": false,
       "usePackageVersion": true
   },

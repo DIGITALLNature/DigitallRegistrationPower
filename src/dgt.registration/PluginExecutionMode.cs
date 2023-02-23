@@ -1,4 +1,4 @@
-﻿namespace DGT.Registrations
+﻿namespace dgt.registration
 {
     public enum PluginExecutionMode
     {

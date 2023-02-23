@@ -9,10 +9,10 @@
     <Company>DIGITALL Nature GmbH</Company>
     <Copyright>DIGITALL Nature GmbH</Copyright>
     <Authors>Marcel Kummerow</Authors>
-    <Product>Digitall Power CLI for Dataverse</Product>
+    <Product>Digitall Registration Power for Dataverse</Product>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MS-RL</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/DIGITALLNature/DigitallPower</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/DIGITALLNature/DigitallRegistrationPower</PackageProjectUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
@@ -23,5 +23,12 @@
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
+
+    <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
 </Project>
