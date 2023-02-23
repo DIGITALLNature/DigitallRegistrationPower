@@ -1,0 +1,41 @@
+{
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "@droidsolutions-oss/semantic-release-nuget": "^1.2.0",
+    "@semantic-release/changelog": "github:semantic-release/changelog",
+    "@semantic-release/git": "github:semantic-release/git",
+    "husky": "^8.0.0",
+    "semantic-release": "^20.1.0"
+  },
+  "release": {
+      "branches": [
+          "main",
+          {
+              "name": "beta",
+              "prerelease": true
+          }
+      ],
+      "plugins": [
+          "@semantic-release/commit-analyzer",
+          "@semantic-release/release-notes-generator",
+          "@semantic-release/changelog",
+          "@droidsolutions-oss/semantic-release-nuget",
+          [
+              "@semantic-release/git",
+              {
+                  "assets": ["CHANGELOG.md"],
+                  "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+              }
+          ],
+          "@semantic-release/github"
+      ],
+      "includeSymbols": true,
+      "projectPath": "src/dgt.registrations/DGT.Registrations.csproj",
+      "npmPublish": false,
+      "usePackageVersion": true
+  },
+  "scripts": {
+      "prepare": "husky install"
+  }
+}
