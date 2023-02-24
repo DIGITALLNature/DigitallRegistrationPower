@@ -10,8 +10,10 @@
     <Copyright>DIGITALL Nature GmbH</Copyright>
     <Authors>Marcel Kummerow</Authors>
     <Product>Digitall Registration Power for Dataverse</Product>
+    <Description>This package contains annotations for dataverse assemblies (plugins and workflows) for automated registration.</Description>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MS-RL</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/DIGITALLNature/DigitallRegistrationPower</PackageProjectUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -24,11 +26,12 @@
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
 
-    <ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <None Include="../../README.md" Pack="true" PackagePath=""/>
   </ItemGroup>
 
 </Project>
