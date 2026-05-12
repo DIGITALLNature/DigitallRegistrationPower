@@ -2,7 +2,7 @@
 This is a NuGet package containing a library that provides annotations for dataverse assemblies (plugins and workflows) for automated registration.
 
 <br/>
-<p align="center">
+<p style="text-align: center;">
     <a href="LICENSE" target="_blank">
         <img src="https://img.shields.io/github/license/DIGITALLNature/DigitallRegistrationPower.svg" alt="GitHub license">
     </a>
@@ -21,7 +21,7 @@ This is a NuGet package containing a library that provides annotations for datav
 # Installation
 You can install this package via CLI: `dotnet add package dgt.registration`.
 
-If you want to install it in a project that is in a subdirectory give the path to the directory containing the `csproj` file or the path to the `csproj` like this: `dotnet add src/MyProject package dgt.registration`.
+If you want to install it in a project in a subdirectory give the path to the directory containing the `csproj` file or the path to the `csproj` like this: `dotnet add src/MyProject package dgt.registration`.
 
 # Usage
 The library provides the following annotations
@@ -30,7 +30,7 @@ The library provides the following annotations
 For plug-ins (derived from IPlugin):
 
 ### CustomApiRegistration
-For custom apis, parameter here is the messagename of the custom api.
+For custom apis, parameter here is the message name of the custom api.
 
 ```csharp
 using dgt.registration;
@@ -46,16 +46,16 @@ public class CalcVacationsPlugin : IPlugin
 ```
 
 ### CustomDataProviderRegistration
-For custom data providers, parameter here is the tablename of the virtual table filled with this data provider and which events this plugin processes.
+For custom data providers, the parameter here is the table name of the virtual table filled with this data provider and which events this plugin processes.
 
 ```csharp
 using dgt.registration;
 
 [CustomDataProviderRegistration("dgt_virtual_table", DataProviderEvent.Create)]
 [CustomDataProviderRegistration("dgt_virtual_table", DataProviderEvent.Update)]
-public class HandleUpsertOnVirtualTable : IPlugin 
+public class HandleUpsertOnVirtualTable : IPlugin
 {
-    public void Execute(IServiceProvider serviceProvider) 
+    public void Execute(IServiceProvider serviceProvider)
     {
         ..
     }
@@ -67,7 +67,7 @@ For regular plugins.
 
 The following parameters can be used:
 - PluginExecutionMode (Asynchronous or Synchronous) **Mandatory**
-- MessageName (Like Create, Update, custom actions etc.) **Mandatory**
+- MessageName (Like Create, Update, custom actions, etc.) **Mandatory**
 - PluginExecutionStage (PreValidation, Pre or Post) **Mandatory**
 - PrimaryEntityName
 - SecondaryEntityName
@@ -89,6 +89,17 @@ public class SamplePlugin : IPlugin {
         ..
     }
 }
+```
+
+### ManagedIdentityRegistration
+For registering a managed identity at assembly level and linking it to the plugin assembly/package in Dataverse.
+Add it as an assembly attribute (for example, in `AssemblyInfo.cs`), not on a plugin class.
+`TenantId` is optional and defaults to the current tenant when not provided.
+
+```csharp
+using dgt.registration;
+
+[assembly: ManagedIdentityRegistration("3f6f8b6e-1a77-4f9a-9b31-7b6f8f1a4e2c", TenantId = "a2d4c0b9-5e13-4ab2-8f6d-1c9e7b3a5d4f")]
 ```
 
 ## Workflowassemblys
@@ -120,7 +131,7 @@ public class SampleWorkflow : CodeActivity
 
 # ❤️&nbsp; Community and Contributions
 
-The DigitallRegistrationPower is a **community-driven open source project** backed by DIGITALL. We are committed to a fully transparent development process and **highly appreciate any contributions**. Whether you are helping us fixing bugs, proposing new feature, improving our documentation or spreading the word - **we would love to have you as part of the DigitallRegistrationPower community**.
+The DigitallRegistrationPower is a **community-driven open source project** backed by DIGITALL. We are committed to a fully transparent development process and **highly appreciate any contributions**. Whether you are helping us fix bugs, proposing new feature, improving our documentation or spreading the word – **we would love to have you as part of the DigitallRegistrationPower community**.
 
 
 ## 📫&nbsp; Have a question? Want to chat? Ran into a problem?
@@ -130,14 +141,14 @@ We are happy to answer your questions via [GitHub Discussions](https://github.co
 
 ## 🤝&nbsp; Found a bug? Missing a specific feature?
 
-Feel free to **file a new issue** with a respective title and description on the the [DigitallPower](https://github.com/DIGITALLNature/DigitallRegistrationPower/issues) repository. If you already found a solution to your problem, **we would love to review your pull request**! Have a look at our [contribution guidelines](https://github.com/DIGITALLNature/DigitallRegistrationPower/contributing.md) to find out about our coding standards.
+Feel free to **file a new issue** with a respective title and description on the [DigitallRegistrationPower](https://github.com/DIGITALLNature/DigitallRegistrationPower/issues) repository. If you already found a solution to your problem, **we would love to review your pull request**! Have a look at our [contribution guidelines](https://github.com/DIGITALLNature/DigitallRegistrationPower/contributing.md) to find out about our coding standards.
 
 
 ## ✅&nbsp; Requirements
 
-DigitallRegistrationPower requires DOTNET Standard 2.o to be used.
+DigitallRegistrationPower requires DOTNET Standard 2.0 to be used.
 
 
 ## 📘&nbsp; License
 
-DigitallRegistrationPower is released under the under terms of the [MS PL License](LICENSE).
+DigitallRegistrationPower is released under the terms of the [MS PL License](LICENSE).
