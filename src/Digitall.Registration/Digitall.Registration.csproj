@@ -20,6 +20,8 @@
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <AssemblyName>Digitall.Registration</AssemblyName>
+    <RootNamespace>Digitall.Registration</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">

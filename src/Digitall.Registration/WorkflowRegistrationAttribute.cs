@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace dgt.registration
+namespace Digitall.Registration
 {
 
     [AttributeUsage(AttributeTargets.Class)]

@@ -1,4 +1,4 @@
-﻿namespace dgt.registration
+﻿namespace Digitall.Registration
 {
     public enum PluginExecutionStage
     {
