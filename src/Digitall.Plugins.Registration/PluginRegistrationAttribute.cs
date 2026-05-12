@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Digitall.Registration
+namespace Digitall.Plugins.Registration
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class PluginRegistrationAttribute : Attribute
@@ -46,7 +46,7 @@ namespace Digitall.Registration
         public string[] FilterAttributes { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public int ExecutionOrder { get; set; } = 100;
 

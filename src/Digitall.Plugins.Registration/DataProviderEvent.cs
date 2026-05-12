@@ -1,4 +1,4 @@
-﻿namespace Digitall.Registration
+﻿namespace Digitall.Plugins.Registration
 {
     public enum DataProviderEvent
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Digitall.Registration
+namespace Digitall.Plugins.Registration
 {
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]

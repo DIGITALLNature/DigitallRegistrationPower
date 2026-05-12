@@ -1,8 +1,9 @@
 ﻿using System;
 
-namespace Digitall.Registration
+namespace Digitall.Plugins.Registration
 {
 
+    [Obsolete("Consider using Custom APIs instead")]
     [AttributeUsage(AttributeTargets.Class)]
     public class WorkflowRegistrationAttribute : Attribute
     {

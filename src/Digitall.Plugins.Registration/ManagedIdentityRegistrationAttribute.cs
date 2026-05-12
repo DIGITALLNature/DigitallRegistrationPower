@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Digitall.Registration
+namespace Digitall.Plugins.Registration
 {
     /// <summary>
     /// Registers a managed identity in Dataverse and associates it with the plugin assembly / package

@@ -20,8 +20,9 @@
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-    <AssemblyName>Digitall.Registration</AssemblyName>
-    <RootNamespace>Digitall.Registration</RootNamespace>
+    <AssemblyName>Digitall.Plugins.Registration</AssemblyName>
+    <RootNamespace>Digitall.Plugins.Registration</RootNamespace>
+    <PackageId>Digitall.Plugins.Registration</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
