@@ -1,0 +1,49 @@
+#-------------------------------------------------------------------------------#
+#               Qodana analysis is configured by qodana.yaml file               #
+#             https://www.jetbrains.com/help/qodana/qodana-yaml.html            #
+#-------------------------------------------------------------------------------#
+
+#################################################################################
+#              WARNING: Do not store sensitive information in this file,        #
+#               as its contents will be included in the Qodana report.          #
+#################################################################################
+version: "1.0"
+
+linter: jetbrains/qodana-cdnet:2026.1-eap
+
+#Specify inspection profile for code analysis
+profile:
+  name: qodana.recommended
+
+dotnet:
+  solution: ./Digitall.Plugins.Registration.slnx
+  configuration: Debug
+
+#Enable inspections
+include:
+  - name: VulnerableLibrariesLocal
+
+#Disable inspections
+exclude:
+  - name: All
+    paths:
+      - README.md
+
+#Execute shell command before Qodana execution (Applied in CI/CD pipeline)
+bootstrap: dotnet restore ./Digitall.Plugins.Registration.slnx && dotnet build ./Digitall.Plugins.Registration.slnx --configuration Debug
+
+#Install IDE plugins before Qodana execution (Applied in CI/CD pipeline)
+#plugins:
+#  - id: <plugin.id> #(plugin id can be found at https://plugins.jetbrains.com)
+
+# Quality gate. Will fail the CI/CD pipeline if any condition is not met
+# severityThresholds - configures maximum thresholds for different problem severities
+# testCoverageThresholds - configures minimum code coverage on a whole project and newly added code
+# Code Coverage is available in Ultimate and Ultimate Plus plans
+failureConditions:
+  severityThresholds:
+    any: 15
+    critical: 5
+  testCoverageThresholds:
+    fresh: 70
+    total: 50
