@@ -410,3 +410,4 @@ FodyWeavers.xsd
 
 # private script files
 *.private.ps1
+.DS_Store
