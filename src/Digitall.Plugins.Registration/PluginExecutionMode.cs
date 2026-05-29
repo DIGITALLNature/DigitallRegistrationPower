@@ -1,4 +1,4 @@
-﻿namespace dgt.registration
+﻿namespace Digitall.Plugins.Registration
 {
     public enum PluginExecutionMode
     {
