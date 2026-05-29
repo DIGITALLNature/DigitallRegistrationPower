@@ -9,35 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+          cache: true
+          cache-dependency-path: "**/packages.lock.json"
 
-    - name: Cache Packages
-      uses: actions/cache@v3
-      with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-nuget-
+      - name: Restore dependencies
+        run: dotnet restore --locked-mode
 
-    - name: Restore dependencies
-      run: dotnet restore --locked-mode
-
-    - name: Materialize Signing Key
-      id: write_sign_key_file
-      uses: timheuer/base64-to-file@v1
-      with:
-        fileName: 'key.snk'
-        encodedString: ${{ secrets.SIGNING_KEY }} 
-
-    - name: Build
-      run: dotnet build --no-restore
-      env:
-        AssemblyOriginatorKeyFile: ${{ steps.write_sign_key_file.outputs.filePath }}
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
 
   release:
     name: Semantic Release
@@ -47,36 +32,41 @@ jobs:
       - build
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           token: ${{ secrets.CI_GITHUB_TOKEN }}
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 24
+          cache: "pnpm"
 
-      - uses: actions/setup-dotnet@v3.0.3
+      - name: Restore DotNet
+        uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: "6.0.x"
+          dotnet-version: 10.x
+          cache: true
+          cache-dependency-path: "**/packages.lock.json"
 
-      - name: Cache Packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.nuget/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-nuget-
+      - name: Install packages
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Dotnet Restore
+        run: dotnet restore
 
       - name: Materialize Signing Key
         id: write_sign_key_file
         uses: timheuer/base64-to-file@v1
         with:
-          fileName: 'key.snk'
-          encodedString: ${{ secrets.SIGNING_KEY }} 
-
-      - name: Install packages
-        run: npm ci --no-fund
+          fileName: "key.snk"
+          encodedString: ${{ secrets.SIGNING_KEY }}
 
       - name: Semantic Release
         env:
