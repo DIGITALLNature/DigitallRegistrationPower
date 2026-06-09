@@ -1,3 +1,11 @@
+# [2.0.0-beta.2](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2026-06-09)
+
+
+### Bug Fixes
+
+* grammar error in xmldoc ([5109069](https://github.com/DIGITALLNature/DigitallRegistrationPower/commit/51090697022d136734fc6a4b16751088bba264f1))
+* malformed xmldoc ([1727119](https://github.com/DIGITALLNature/DigitallRegistrationPower/commit/172711967ed9658e66f72bb3fd0b7f667c7d6ee8))
+
 # [2.0.0-beta.1](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v1.0.1...v2.0.0-beta.1) (2026-05-29)
 
 
