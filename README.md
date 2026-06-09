@@ -3,7 +3,7 @@
 NuGet package providing C# attributes for automated registration of Microsoft Dataverse plugin assemblies and workflow activities.
 
 <p align="center">
-    <a href="LICENSE" target="_blank">
+    <a href="LICENSE.md" target="_blank">
         <img src="https://img.shields.io/github/license/DIGITALLNature/DigitallRegistrationPower.svg" alt="GitHub license">
     </a>
     <a href="https://github.com/DIGITALLNature/DigitallRegistrationPower/releases" target="_blank">
@@ -247,4 +247,4 @@ using Digitall.Plugins.Registration;
 
 ## License
 
-Released under the [Microsoft Public License (MS-PL)](LICENSE).
+Released under the [Microsoft Public License (MS-PL)](LICENSE.md).
