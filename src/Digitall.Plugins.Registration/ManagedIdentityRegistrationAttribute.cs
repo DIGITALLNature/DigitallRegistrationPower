@@ -27,7 +27,7 @@ namespace Digitall.Plugins.Registration
         public string ClientId { get; }
 
         /// <summary>
-        /// Tenant id of the managed identity. Default to the current tenant if not provided.
+        /// Tenant id of the managed identity. Defaults to the current tenant if not provided.
         /// </summary>
         public string TenantId { get; set; }
     }
