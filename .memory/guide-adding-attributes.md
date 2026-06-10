@@ -10,7 +10,9 @@
 File: `src/Digitall.Plugins.Registration/<Name>RegistrationAttribute.cs`
 
 ```csharp
-// Copyright (c) DIGITALL Nature. All rights reserved
+// Copyright (c) DIGITALL Nature. All rights reserved.
+// This code is licensed under the Microsoft Public License (MS-PL). See LICENSE.md in the project root for license information.
+
 using System;
 
 namespace Digitall.Plugins.Registration
@@ -34,7 +36,9 @@ namespace Digitall.Plugins.Registration
 File: `src/Digitall.Plugins.Registration/<EnumName>.cs`
 
 ```csharp
-// Copyright (c) DIGITALL Nature. All rights reserved
+// Copyright (c) DIGITALL Nature. All rights reserved.
+// This code is licensed under the Microsoft Public License (MS-PL). See LICENSE.md in the project root for license information.
+
 namespace Digitall.Plugins.Registration
 {
     public enum MyEnum
