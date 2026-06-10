@@ -2,7 +2,7 @@
 
 ## Status
 
-Current version: **1.0.1** (tag `v1.0.1`, branches `main` / `beta`)  
+Current version: **1.0.1** (tag `v1.0.1`, branches `main` / `beta`)
 NuGet package: [`Digitall.Plugins.Registration`](https://www.nuget.org/packages/Digitall.Plugins.Registration)
 
 ## What this project is
@@ -20,10 +20,11 @@ DigitallRegistrationPower/
 │       ├── CustomApiRegistrationAttribute.cs
 │       ├── CustomDataProviderRegistrationAttribute.cs
 │       ├── WorkflowRegistrationAttribute.cs
+│       ├── ManagedIdentityRegistrationAttribute.cs
 │       ├── PluginExecutionMode.cs
 │       ├── PluginExecutionStage.cs
 │       └── DataProviderEvent.cs
-├── Digitall.Plugins.Registration.sln
+├── Digitall.Plugins.Registration.slnx
 ├── AGENTS.md                                 ← agent rules, code conventions, commit format
 ├── README.md                                 ← public docs, included as NuGet PackageReadme
 ├── package.json                              ← semantic-release + commitlint config
