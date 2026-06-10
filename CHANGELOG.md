@@ -1,3 +1,30 @@
+# [2.0.0](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v1.0.1...v2.0.0) (2026-06-10)
+
+
+* refactor!: rename project and namespace to Digitall.Plugins.Registration ([8ca3a6c](https://github.com/DIGITALLNature/DigitallRegistrationPower/commit/8ca3a6c7e458dc90699ef7e4a03dd65905f1dff9))
+
+
+### Bug Fixes
+
+* grammar error in xmldoc ([b797427](https://github.com/DIGITALLNature/DigitallRegistrationPower/commit/b797427541b0b8e04bd52306885d929fc5e5a3d8))
+* malformed xmldoc ([8112011](https://github.com/DIGITALLNature/DigitallRegistrationPower/commit/81120115040a707392d4b64089e6eedd5eba6fbd))
+
+
+### Features
+
+* add ManagedIdentityRegistrationAttribute ([4075977](https://github.com/DIGITALLNature/DigitallRegistrationPower/commit/40759777fdc5099b7c249943fcebd91c532156f8))
+
+
+### BREAKING CHANGES
+
+* package ID, assembly name, and root namespace changed
+from dgt.registration to Digitall.Plugins.Registration.
+
+Consumers must update their package reference and replace
+'using dgt.registration;' with 'using Digitall.Plugins.Registration;'.
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
+
 # [2.0.0-beta.2](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2026-06-09)
 
 
