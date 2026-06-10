@@ -44,7 +44,9 @@ When making changes to this codebase, **you MUST keep the documentation up to da
 
 - **Language:** C# targeting `netstandard2.0` — no explicit `LangVersion`, `Nullable`, or `ImplicitUsings` set; keep it that way
 - **Naming:** Follow standard .NET naming conventions (PascalCase for public members, `_camelCase` for private fields)
-- **Licensing header:** All source files start with `// Copyright (c) DIGITALL Nature. All rights reserved`
+- **Licensing header:** All source files start with the exact two-line header:
+  - `// Copyright (c) DIGITALL Nature. All rights reserved.`
+  - `// This code is licensed under the Microsoft Public License (MS-PL). See LICENSE.md in the project root for license information.`
 - **No test project** — this package has no automated tests; validate changes by building and inspecting the public API
 - **Zero runtime dependencies** — do not add `<PackageReference>` entries that end up in consumers' dependency graph; use `PrivateAssets=all` for build-only tools
 - **Assembly signing** — the project is strong-name signed; the `.snk` key is injected via the `SIGNING_KEY` CI secret and must never be committed

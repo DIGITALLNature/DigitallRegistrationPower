@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) DIGITALL Nature. All rights reserved.
+// This code is licensed under the Microsoft Public License (MS-PL). See LICENSE.md in the project root for license information.
+
+using System;
 
 namespace Digitall.Plugins.Registration
 {
