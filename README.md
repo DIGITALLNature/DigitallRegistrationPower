@@ -78,7 +78,6 @@ Use `[PluginRegistration]` on classes that implement `IPlugin` for standard plug
 | `PreEntityImageAttributes` | `string[]` | `null` | Attributes for the pre-image; `null` = all |
 | `PostEntityImage` | `bool` | `false` | Register a post-entity image |
 | `PostEntityImageAttributes` | `string[]` | `null` | Attributes for the post-image; `null` = all |
-| `Configuration` | `string` | `null` | Unsecure configuration of the plugin step |
 
 ```csharp
 using Digitall.Plugins.Registration;

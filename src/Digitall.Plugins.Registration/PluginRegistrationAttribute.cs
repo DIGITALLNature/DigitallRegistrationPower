@@ -72,11 +72,6 @@ namespace Digitall.Plugins.Registration
         /// Attributes for PostEntityImage - leave null for all
         /// </summary>
         public string[] PostEntityImageAttributes { get; set; }
-
-        /// <summary>
-        /// Unsecure configuration of the Plugin Step
-        /// </summary>
-        public string Configuration { get; set; }
     }
 
 }
