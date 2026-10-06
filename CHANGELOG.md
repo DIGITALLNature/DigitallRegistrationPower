@@ -1,3 +1,15 @@
+# [3.0.0-beta.2](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2026-10-06)
+
+
+* feat!: use named properties for custom data provider registration ([#10](https://github.com/DIGITALLNature/DigitallRegistrationPower/issues/10)) ([f351885](https://github.com/DIGITALLNature/DigitallRegistrationPower/commit/f351885a4271f6424100ac8baf73b11758633a79))
+
+
+### BREAKING CHANGES
+
+* remove the entity-name constructor and EntityName property.
+Declarations must use DataSourceSchemaName and Event, with ProviderName supplied once
+per provider group.
+
 # [3.0.0-beta.1](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v2.0.0...v3.0.0-beta.1) (2026-10-06)
 
 
