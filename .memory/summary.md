@@ -2,7 +2,7 @@
 
 ## Status
 
-Current releases: **main `2.0.0`** (`v2.0.0`), **beta `2.0.0-beta.3`** (`v2.0.0-beta.3`)
+Current releases: **main `2.0.0`** (`v2.0.0`), **beta `3.0.0-beta.2`** (`v3.0.0-beta.2`)
 NuGet package: [`Digitall.Plugins.Registration`](https://www.nuget.org/packages/Digitall.Plugins.Registration)
 
 ## What this project is
