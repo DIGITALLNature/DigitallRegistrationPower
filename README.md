@@ -124,18 +124,29 @@ public class CalcVacationsPlugin : IPlugin
 
 ### CustomDataProviderRegistration
 
-Use `[CustomDataProviderRegistration]` on classes that implement `IPlugin` and act as a virtual table data provider. Stack one attribute per event you want to handle.
+Use `[CustomDataProviderRegistration]` on classes that implement `IPlugin` to declare operation handlers for a custom data provider. The attribute has a parameterless constructor and uses named properties only. Stack one attribute per operation and use the same data-source schema name to group handlers into one provider.
 
-| Parameter | Type | Description |
-|---|---|---|
-| `entityName` | `string` | Logical name of the virtual table |
-| `eventRegistration` | `DataProviderEvent` | The data provider event to handle |
+The provider is identified by its **data-source configuration table**, not by a virtual table. One provider can serve multiple virtual tables.
+
+| Property | Type | Requirement | Description |
+|---|---|---|---|
+| `DataSourceSchemaName` | `string` | Required on each declaration | Publisher-prefixed schema name of the data-source configuration table; deployment key |
+| `Event` | `DataProviderEvent` | Required on each declaration | Operation handled by the decorated class; defaults to `Unspecified`, which is invalid for deployment |
+| `ProviderName` | `string` | Required once per grouped provider | Provider display name; explicitly supplied values set/update the name |
+| `DataSourceDisplayName` | `string` | Optional | Singular label for the configuration table |
+| `DataSourcePluralName` | `string` | Optional | Plural label for the configuration table |
+| `Description` | `string` | Optional | Provider description |
 
 ```csharp
 using Digitall.Plugins.Registration;
 
-[CustomDataProviderRegistration("dgt_virtual_table", DataProviderEvent.Create)]
-[CustomDataProviderRegistration("dgt_virtual_table", DataProviderEvent.Update)]
+[CustomDataProviderRegistration(
+    DataSourceSchemaName = "dgt_CrmDataSource",
+    ProviderName = "CRM Provider",
+    Event = DataProviderEvent.Create)]
+[CustomDataProviderRegistration(
+    DataSourceSchemaName = "dgt_CrmDataSource",
+    Event = DataProviderEvent.Update)]
 public class HandleUpsertOnVirtualTable : IPlugin
 {
     public void Execute(IServiceProvider serviceProvider)
@@ -144,6 +155,19 @@ public class HandleUpsertOnVirtualTable : IPlugin
     }
 }
 ```
+
+Provider metadata can be supplied on any declaration in the group; it does not need to be repeated. Optional string properties default to `null`. Omitted metadata preserves existing values: a minimal declaration updates the provider name and handler assignments, but does not change existing table labels or descriptions. For first-time creation only, omitted table labels default to the schema name (singular) and the singular label plus `" Records"` (plural).
+
+**Registration-tool contract:** This package supplies metadata only; it does not perform Dataverse registration or validation. A compatible dgtp release must:
+
+- Validate required values before writes, reject `Unspecified` and unknown events, and reject conflicting metadata or different classes claiming the same provider operation.
+- Resolve the schema name to the table's logical name and find the provider by `datasourcelogicalname`; reject ambiguous provider matches.
+- Create/update the `EntityDataProvider` record and assign registered plugin-type IDs to its operation fields, rather than creating ordinary SDK message-processing steps.
+- Preserve existing handlers for undeclared operations and preserve omitted optional metadata. Omission does not clear a value or remove a handler.
+
+Creating or validating the provider's data-source configuration table belongs to the registration tool. The special table metadata and creation/reuse lifecycle must be verified before first-time provisioning is supported. Data-source records, custom configuration columns, virtual tables, and their mappings are outside this declaration's scope. Credentials must not be stored in attributes.
+
+**Breaking-change migration:** The `(string entityName, DataProviderEvent eventRegistration)` constructor and `EntityName` property have been removed. Replace old declarations such as `[CustomDataProviderRegistration("dgt_virtual_table", DataProviderEvent.Retrieve)]` with named properties as shown above, selecting the provider's data-source schema name rather than copying the virtual-table name. Supply `ProviderName` at least once per provider and rebuild the plugin assembly. This API requires corresponding support in dgtp; legacy declarations must be rejected with migration guidance, not reinterpreted.
 
 ---
 
@@ -204,7 +228,7 @@ using Digitall.Plugins.Registration;
 |---|---|---|---|
 | `PluginRegistrationAttribute` | `class` | ✅ | Registers a plugin step |
 | `CustomApiRegistrationAttribute` | `class` | ✅ | Registers a Custom API handler |
-| `CustomDataProviderRegistrationAttribute` | `class` | ✅ | Registers a virtual table data provider handler |
+| `CustomDataProviderRegistrationAttribute` | `class` | ✅ | Declares a provider operation handler keyed by its data-source configuration table |
 | `WorkflowRegistrationAttribute` | `class` | ❌ | Registers a workflow activity |
 | `ManagedIdentityRegistrationAttribute` | `assembly` | ❌ | Associates a managed identity with the assembly |
 
@@ -228,13 +252,14 @@ using Digitall.Plugins.Registration;
 
 #### `DataProviderEvent`
 
-| Value | Description |
-|---|---|
-| `Retrieve` | Single-record retrieve |
-| `RetrieveMultiple` | Multi-record retrieve |
-| `Create` | Create operation |
-| `Update` | Update operation |
-| `Delete` | Delete operation |
+| Value | Int | Description |
+|---|---|---|
+| `Unspecified` | `-1` | Default sentinel; invalid for deployment |
+| `Retrieve` | `0` | Single-record retrieve |
+| `RetrieveMultiple` | `1` | Multi-record retrieve |
+| `Create` | `2` | Create operation |
+| `Update` | `3` | Update operation |
+| `Delete` | `4` | Delete operation |
 
 ---
 
