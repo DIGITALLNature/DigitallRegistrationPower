@@ -49,7 +49,8 @@ namespace Digitall.Plugins.Registration
         public string[] FilterAttributes { get; set; }
 
         /// <summary>
-        ///
+        /// Gets or sets the execution order of the plugin step. Defaults to 100; lower values execute
+        /// before higher values for steps registered on the same message and stage.
         /// </summary>
         public int ExecutionOrder { get; set; } = 100;
 
