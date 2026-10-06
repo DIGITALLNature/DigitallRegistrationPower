@@ -13,6 +13,12 @@ A release is created automatically when a push lands on `main` or `beta` **and**
 - `main` → stable release (e.g. `1.2.0`)
 - `beta` → pre-release (e.g. `1.2.0-beta.1`)
 
+## Keep release branches aligned
+
+Semantic-release can only use release tags reachable from the branch being released. After a stable release on `main`, merge `main` into `beta` through a PR so the stable release commit and tag are part of beta's history before its next release. Resolve generated `CHANGELOG.md` conflicts by retaining both branches' release entries, and keep the beta README/API documentation consistent with beta's code.
+
+Do not resolve a `main`-to-`beta` sync by merging beta changes into `main`, force-pushing either release branch, or moving published tags. If the sync PR has conflicts, create a branch from `beta`, merge `main` into it, resolve the conflicts, then open a PR back to `beta`.
+
 ## What semantic-release does
 
 1. Analyzes commit messages since last release (Conventional Commits)
