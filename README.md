@@ -124,29 +124,31 @@ public class CalcVacationsPlugin : IPlugin
 
 ### CustomDataProviderRegistration
 
-Use `[CustomDataProviderRegistration]` on classes that implement `IPlugin` to declare operation handlers for a custom data provider. The attribute has a parameterless constructor and uses named properties only. Stack one attribute per operation and use the same data-source schema name to group handlers into one provider.
+Use `[CustomDataProviderRegistration]` on classes that implement `IPlugin` to declare operation handlers for a custom data provider. Its constructor requires the data-source schema name, event, and provider name; optional metadata can be set with named properties. Stack one attribute per operation and use the same data-source schema name to group handlers into one provider.
 
 The provider is identified by its **data-source configuration table**, not by a virtual table. One provider can serve multiple virtual tables.
 
-| Property | Type | Requirement | Description |
+**Required constructor arguments**
+
+| Parameter | Type | Description |
 |---|---|---|---|
-| `DataSourceSchemaName` | `string` | Required on each declaration | Publisher-prefixed schema name of the data-source configuration table; deployment key |
-| `Event` | `DataProviderEvent` | Required on each declaration | Operation handled by the decorated class; defaults to `Unspecified`, which is invalid for deployment |
-| `ProviderName` | `string` | Required once per grouped provider | Provider display name; explicitly supplied values set/update the name |
-| `DataSourceDisplayName` | `string` | Optional | Singular label for the configuration table |
-| `DataSourcePluralName` | `string` | Optional | Plural label for the configuration table |
-| `Description` | `string` | Optional | Provider description |
+| `dataSourceSchemaName` | `string` | Publisher-prefixed schema name of the data-source configuration table; deployment key |
+| `eventRegistration` | `DataProviderEvent` | Operation handled by the decorated class |
+| `providerName` | `string` | Provider display name; explicitly supplied values set/update the name |
+
+**Optional properties**
+
+| Property | Type | Description |
+|---|---|---|
+| `DataSourceDisplayName` | `string` | Singular label for the configuration table |
+| `DataSourcePluralName` | `string` | Plural label for the configuration table |
+| `Description` | `string` | Provider description |
 
 ```csharp
 using Digitall.Plugins.Registration;
 
-[CustomDataProviderRegistration(
-    DataSourceSchemaName = "dgt_CrmDataSource",
-    ProviderName = "CRM Provider",
-    Event = DataProviderEvent.Create)]
-[CustomDataProviderRegistration(
-    DataSourceSchemaName = "dgt_CrmDataSource",
-    Event = DataProviderEvent.Update)]
+[CustomDataProviderRegistration("dgt_CrmDataSource", DataProviderEvent.Create, "CRM Provider")]
+[CustomDataProviderRegistration("dgt_CrmDataSource", DataProviderEvent.Update, "CRM Provider")]
 public class HandleUpsertOnVirtualTable : IPlugin
 {
     public void Execute(IServiceProvider serviceProvider)
@@ -156,7 +158,7 @@ public class HandleUpsertOnVirtualTable : IPlugin
 }
 ```
 
-Provider metadata can be supplied on any declaration in the group; it does not need to be repeated. Optional string properties default to `null`. Omitted metadata preserves existing values: a minimal declaration updates the provider name and handler assignments, but does not change existing table labels or descriptions. For first-time creation only, omitted table labels default to the schema name (singular) and the singular label plus `" Records"` (plural).
+The provider name is required on every declaration by the constructor; the registration tool can use the value from any declaration in the group. Optional string properties default to `null`. Omitted optional metadata preserves existing values: a declaration without optional metadata does not change existing table labels or descriptions. For first-time creation only, omitted table labels default to the schema name (singular) and the singular label plus `" Records"` (plural).
 
 **Registration-tool contract:** This package supplies metadata only; it does not perform Dataverse registration or validation. A compatible dgtp release must:
 
@@ -167,7 +169,7 @@ Provider metadata can be supplied on any declaration in the group; it does not n
 
 Creating or validating the provider's data-source configuration table belongs to the registration tool. The special table metadata and creation/reuse lifecycle must be verified before first-time provisioning is supported. Data-source records, custom configuration columns, virtual tables, and their mappings are outside this declaration's scope. Credentials must not be stored in attributes.
 
-**Breaking-change migration:** The `(string entityName, DataProviderEvent eventRegistration)` constructor and `EntityName` property have been removed. Replace old declarations such as `[CustomDataProviderRegistration("dgt_virtual_table", DataProviderEvent.Retrieve)]` with named properties as shown above, selecting the provider's data-source schema name rather than copying the virtual-table name. Supply `ProviderName` at least once per provider and rebuild the plugin assembly. This API requires corresponding support in dgtp; legacy declarations must be rejected with migration guidance, not reinterpreted.
+**Breaking-change migration:** The `(string entityName, DataProviderEvent eventRegistration)` constructor and `EntityName` property have been removed. Replace old declarations such as `[CustomDataProviderRegistration("dgt_virtual_table", DataProviderEvent.Retrieve)]` with the three-argument constructor shown above, selecting the provider's data-source schema name rather than copying the virtual-table name. Supply the provider name on each declaration and rebuild the plugin assembly. This API requires corresponding support in dgtp; legacy declarations must be rejected with migration guidance, not reinterpreted.
 
 ---
 

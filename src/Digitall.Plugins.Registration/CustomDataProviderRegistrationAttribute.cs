@@ -8,21 +8,28 @@ namespace Digitall.Plugins.Registration
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class CustomDataProviderRegistrationAttribute : Attribute
     {
+        public CustomDataProviderRegistrationAttribute(string dataSourceSchemaName, DataProviderEvent eventRegistration, string providerName)
+        {
+            DataSourceSchemaName = dataSourceSchemaName;
+            Event = eventRegistration;
+            ProviderName = providerName;
+        }
+
         /// <summary>
         /// Publisher-prefixed schema name of the provider's data-source configuration table.
-        /// Required on each declaration; identifies the provider independently of virtual tables.
+        /// Identifies the provider independently of virtual tables.
         /// </summary>
-        public string DataSourceSchemaName { get; set; }
+        public string DataSourceSchemaName { get; }
 
         /// <summary>
         /// Operation handled by the decorated plugin class. Must be explicitly specified.
         /// </summary>
-        public DataProviderEvent Event { get; set; } = DataProviderEvent.Unspecified;
+        public DataProviderEvent Event { get; }
 
         /// <summary>
-        /// Provider display name. Required on at least one declaration for the same provider.
+        /// Provider display name.
         /// </summary>
-        public string ProviderName { get; set; }
+        public string ProviderName { get; }
 
         /// <summary>
         /// Optional singular label for the data-source configuration table.
