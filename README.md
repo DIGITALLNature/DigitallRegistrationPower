@@ -78,7 +78,6 @@ Use `[PluginRegistration]` on classes that implement `IPlugin` for standard plug
 | `PreEntityImageAttributes` | `string[]` | `null` | Attributes for the pre-image; `null` = all |
 | `PostEntityImage` | `bool` | `false` | Register a post-entity image |
 | `PostEntityImageAttributes` | `string[]` | `null` | Attributes for the post-image; `null` = all |
-| `Configuration` | `string` | `null` | Unsecure configuration of the plugin step |
 
 ```csharp
 using Digitall.Plugins.Registration;
@@ -125,18 +124,31 @@ public class CalcVacationsPlugin : IPlugin
 
 ### CustomDataProviderRegistration
 
-Use `[CustomDataProviderRegistration]` on classes that implement `IPlugin` and act as a virtual table data provider. Stack one attribute per event you want to handle.
+Use `[CustomDataProviderRegistration]` on classes that implement `IPlugin` to declare operation handlers for a custom data provider. Its constructor requires the data-source schema name, event, and provider name; optional metadata can be set with named properties. Stack one attribute per operation and use the same data-source schema name to group handlers into one provider.
+
+The provider is identified by its **data-source configuration table**, not by a virtual table. One provider can serve multiple virtual tables.
+
+**Required constructor arguments**
 
 | Parameter | Type | Description |
+|---|---|---|---|
+| `dataSourceSchemaName` | `string` | Publisher-prefixed schema name of the data-source configuration table; deployment key |
+| `eventRegistration` | `DataProviderEvent` | Operation handled by the decorated class |
+| `providerName` | `string` | Provider display name; explicitly supplied values set/update the name |
+
+**Optional properties**
+
+| Property | Type | Description |
 |---|---|---|
-| `entityName` | `string` | Logical name of the virtual table |
-| `eventRegistration` | `DataProviderEvent` | The data provider event to handle |
+| `DataSourceDisplayName` | `string` | Singular label for the configuration table |
+| `DataSourcePluralName` | `string` | Plural label for the configuration table |
+| `Description` | `string` | Provider description |
 
 ```csharp
 using Digitall.Plugins.Registration;
 
-[CustomDataProviderRegistration("dgt_virtual_table", DataProviderEvent.Create)]
-[CustomDataProviderRegistration("dgt_virtual_table", DataProviderEvent.Update)]
+[CustomDataProviderRegistration("dgt_CrmDataSource", DataProviderEvent.Create, "CRM Provider")]
+[CustomDataProviderRegistration("dgt_CrmDataSource", DataProviderEvent.Update, "CRM Provider")]
 public class HandleUpsertOnVirtualTable : IPlugin
 {
     public void Execute(IServiceProvider serviceProvider)
@@ -145,6 +157,19 @@ public class HandleUpsertOnVirtualTable : IPlugin
     }
 }
 ```
+
+The provider name is required on every declaration by the constructor; the registration tool can use the value from any declaration in the group. Optional string properties default to `null`. Omitted optional metadata preserves existing values: a declaration without optional metadata does not change existing table labels or descriptions. For first-time creation only, omitted table labels default to the schema name (singular) and the singular label plus `" Records"` (plural).
+
+**Registration-tool contract:** This package supplies metadata only; it does not perform Dataverse registration or validation. A compatible dgtp release must:
+
+- Validate required values before writes, reject `Unspecified` and unknown events, and reject conflicting metadata or different classes claiming the same provider operation.
+- Resolve the schema name to the table's logical name and find the provider by `datasourcelogicalname`; reject ambiguous provider matches.
+- Create/update the `EntityDataProvider` record and assign registered plugin-type IDs to its operation fields, rather than creating ordinary SDK message-processing steps.
+- Preserve existing handlers for undeclared operations and preserve omitted optional metadata. Omission does not clear a value or remove a handler.
+
+Creating or validating the provider's data-source configuration table belongs to the registration tool. The special table metadata and creation/reuse lifecycle must be verified before first-time provisioning is supported. Data-source records, custom configuration columns, virtual tables, and their mappings are outside this declaration's scope. Credentials must not be stored in attributes.
+
+**Breaking-change migration:** The `(string entityName, DataProviderEvent eventRegistration)` constructor and `EntityName` property have been removed. Replace old declarations such as `[CustomDataProviderRegistration("dgt_virtual_table", DataProviderEvent.Retrieve)]` with the three-argument constructor shown above, selecting the provider's data-source schema name rather than copying the virtual-table name. Supply the provider name on each declaration and rebuild the plugin assembly. This API requires corresponding support in dgtp; legacy declarations must be rejected with migration guidance, not reinterpreted.
 
 ---
 
@@ -205,7 +230,7 @@ using Digitall.Plugins.Registration;
 |---|---|---|---|
 | `PluginRegistrationAttribute` | `class` | ✅ | Registers a plugin step |
 | `CustomApiRegistrationAttribute` | `class` | ✅ | Registers a Custom API handler |
-| `CustomDataProviderRegistrationAttribute` | `class` | ✅ | Registers a virtual table data provider handler |
+| `CustomDataProviderRegistrationAttribute` | `class` | ✅ | Declares a provider operation handler keyed by its data-source configuration table |
 | `WorkflowRegistrationAttribute` | `class` | ❌ | Registers a workflow activity |
 | `ManagedIdentityRegistrationAttribute` | `assembly` | ❌ | Associates a managed identity with the assembly |
 
@@ -229,13 +254,14 @@ using Digitall.Plugins.Registration;
 
 #### `DataProviderEvent`
 
-| Value | Description |
-|---|---|
-| `Retrieve` | Single-record retrieve |
-| `RetrieveMultiple` | Multi-record retrieve |
-| `Create` | Create operation |
-| `Update` | Update operation |
-| `Delete` | Delete operation |
+| Value | Int | Description |
+|---|---|---|
+| `Unspecified` | `-1` | Default sentinel; invalid for deployment |
+| `Retrieve` | `0` | Single-record retrieve |
+| `RetrieveMultiple` | `1` | Multi-record retrieve |
+| `Create` | `2` | Create operation |
+| `Update` | `3` | Update operation |
+| `Delete` | `4` | Delete operation |
 
 ---
 

@@ -2,7 +2,7 @@
 
 ## Status
 
-Current version: **1.0.1** (tag `v1.0.1`, branches `main` / `beta`)
+Current releases: **main `2.0.0`** (`v2.0.0`), **beta `3.0.0-beta.2`** (`v3.0.0-beta.2`)
 NuGet package: [`Digitall.Plugins.Registration`](https://www.nuget.org/packages/Digitall.Plugins.Registration)
 
 ## What this project is
@@ -46,7 +46,10 @@ DigitallRegistrationPower/
 | How to add a new attribute | `.memory/guide-adding-attributes.md` |
 | Non-obvious C# / build caveats | `.memory/research-project-conventions.md` |
 | Rename decision (dgt.registration → Digitall.Plugins.Registration) | `.memory/decision-rename-namespace.md` |
+| Property-based provider registration and dgtp coordination | `.memory/decision-provider-registration-contract.md` |
 
 ## Active tasks
 
-None.
+The property-based custom data provider API is implemented in the registration library.
+Corresponding dgtp consumer support is still required; see README.md for the contract and migration.
+First-time data-source table provisioning remains subject to verification of Dataverse's special table metadata.

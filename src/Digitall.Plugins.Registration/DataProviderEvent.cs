@@ -5,10 +5,11 @@ namespace Digitall.Plugins.Registration
 {
     public enum DataProviderEvent
     {
-        Retrieve,
-        RetrieveMultiple,
-        Create,
-        Update,
-        Delete
+        Unspecified = -1,
+        Retrieve = 0,
+        RetrieveMultiple = 1,
+        Create = 2,
+        Update = 3,
+        Delete = 4
     }
 }

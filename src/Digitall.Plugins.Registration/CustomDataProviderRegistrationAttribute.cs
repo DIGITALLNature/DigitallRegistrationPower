@@ -5,25 +5,49 @@ using System;
 
 namespace Digitall.Plugins.Registration
 {
-
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class CustomDataProviderRegistrationAttribute : Attribute
     {
-        public CustomDataProviderRegistrationAttribute(string entityName, DataProviderEvent eventRegistration)
+        private readonly DataProviderEvent _event;
+
+        public CustomDataProviderRegistrationAttribute(string dataSourceSchemaName, DataProviderEvent eventRegistration, string providerName)
         {
-            EntityName = entityName;
-            Event = eventRegistration;
+            DataSourceSchemaName = dataSourceSchemaName;
+            _event = eventRegistration;
+            ProviderName = providerName;
         }
 
         /// <summary>
-        /// DataProvider for Entity
+        /// Publisher-prefixed schema name of the provider's data-source configuration table.
+        /// Identifies the provider independently of virtual tables.
         /// </summary>
-        public string EntityName { get; }
+        public string DataSourceSchemaName { get; }
 
         /// <summary>
-        /// Register Plugin to Event of DataProvider
+        /// Operation handled by the decorated plugin class. Must be explicitly specified.
         /// </summary>
-        public DataProviderEvent Event { get; }
+        public int Event => (int)_event;
 
+        /// <summary>
+        /// Provider display name.
+        /// </summary>
+        public string ProviderName { get; }
+
+        /// <summary>
+        /// Optional singular label for the data-source configuration table.
+        /// When omitted, preserves the existing label.
+        /// </summary>
+        public string DataSourceDisplayName { get; set; }
+
+        /// <summary>
+        /// Optional plural label for the data-source configuration table.
+        /// When omitted, preserves the existing label.
+        /// </summary>
+        public string DataSourcePluralName { get; set; }
+
+        /// <summary>
+        /// Optional provider description. When omitted, preserves the existing description.
+        /// </summary>
+        public string Description { get; set; }
     }
 }
