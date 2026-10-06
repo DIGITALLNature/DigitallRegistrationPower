@@ -1,3 +1,10 @@
+# [3.0.0-beta.3](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v3.0.0-beta.2...v3.0.0-beta.3) (2026-10-06)
+
+
+### Bug Fixes
+
+* address open repository issues ([#11](https://github.com/DIGITALLNature/DigitallRegistrationPower/issues/11)) ([b9a52c5](https://github.com/DIGITALLNature/DigitallRegistrationPower/commit/b9a52c5f9e4cc37dfcef85e78bf50dbe2ec2115c))
+
 # [3.0.0-beta.2](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2026-10-06)
 
 
