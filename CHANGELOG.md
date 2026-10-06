@@ -1,3 +1,17 @@
+# [2.0.0-beta.3](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2026-10-06)
+
+
+* feat!: remove Configuration property from PluginRegistrationAttribute ([#7](https://github.com/DIGITALLNature/DigitallRegistrationPower/issues/7)) ([4b46481](https://github.com/DIGITALLNature/DigitallRegistrationPower/commit/4b464813e58fcbd84bc5f1c81b50457b698b17ae))
+
+
+### BREAKING CHANGES
+
+* PluginRegistrationAttribute no longer has a
+Configuration property. Migrate to Environment Variables or another
+runtime configuration mechanism.
+
+Co-authored-by: Junie <junie@jetbrains.com>
+
 # [2.0.0-beta.2](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2026-06-09)
 
 
