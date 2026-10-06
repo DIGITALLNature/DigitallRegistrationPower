@@ -2,7 +2,7 @@
 
 ## Status
 
-Current version: **1.0.1** (tag `v1.0.1`, branches `main` / `beta`)
+Current releases: **main `2.0.0`** (`v2.0.0`), **beta `2.0.0-beta.3`** (`v2.0.0-beta.3`)
 NuGet package: [`Digitall.Plugins.Registration`](https://www.nuget.org/packages/Digitall.Plugins.Registration)
 
 ## What this project is
