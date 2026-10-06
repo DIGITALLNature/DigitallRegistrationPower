@@ -8,10 +8,12 @@ namespace Digitall.Plugins.Registration
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class CustomDataProviderRegistrationAttribute : Attribute
     {
+        private readonly DataProviderEvent _event;
+
         public CustomDataProviderRegistrationAttribute(string dataSourceSchemaName, DataProviderEvent eventRegistration, string providerName)
         {
             DataSourceSchemaName = dataSourceSchemaName;
-            Event = eventRegistration;
+            _event = eventRegistration;
             ProviderName = providerName;
         }
 
@@ -24,7 +26,7 @@ namespace Digitall.Plugins.Registration
         /// <summary>
         /// Operation handled by the decorated plugin class. Must be explicitly specified.
         /// </summary>
-        public DataProviderEvent Event { get; }
+        public int Event => (int)_event;
 
         /// <summary>
         /// Provider display name.
