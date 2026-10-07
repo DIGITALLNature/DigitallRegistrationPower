@@ -20,7 +20,6 @@ DigitallRegistrationPower/
 │       ├── CustomApiRegistrationAttribute.cs
 │       ├── CustomDataProviderRegistrationAttribute.cs
 │       ├── WorkflowRegistrationAttribute.cs
-│       ├── ManagedIdentityRegistrationAttribute.cs
 │       ├── PluginExecutionMode.cs
 │       ├── PluginExecutionStage.cs
 │       └── DataProviderEvent.cs
@@ -47,6 +46,7 @@ DigitallRegistrationPower/
 | Non-obvious C# / build caveats | `.memory/research-project-conventions.md` |
 | Rename decision (dgt.registration → Digitall.Plugins.Registration) | `.memory/decision-rename-namespace.md` |
 | Property-based provider registration and dgtp coordination | `.memory/decision-provider-registration-contract.md` |
+| Removal of ManagedIdentityRegistrationAttribute | `.memory/decision-remove-managed-identity-attribute.md` |
 
 ## Active tasks
 
