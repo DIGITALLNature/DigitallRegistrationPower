@@ -1,3 +1,16 @@
+# [3.0.0-beta.4](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v3.0.0-beta.3...v3.0.0-beta.4) (2026-10-26)
+
+
+* feat!: remove ManagedIdentityRegistration attribute ([#13](https://github.com/DIGITALLNature/DigitallRegistrationPower/issues/13)) ([2e94c1a](https://github.com/DIGITALLNature/DigitallRegistrationPower/commit/2e94c1abb9de773169b35d195dae3a6aa61feffb))
+
+
+### BREAKING CHANGES
+
+* ManagedIdentityRegistrationAttribute has been removed because
+embedding the client ID in assembly metadata causes cross-environment issues.
+
+Co-authored-by: Junie <junie@jetbrains.com>
+
 # [3.0.0-beta.3](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v3.0.0-beta.2...v3.0.0-beta.3) (2026-10-06)
 
 
