@@ -27,7 +27,6 @@ NuGet package providing C# attributes for automated registration of Microsoft Da
   - [Custom API Registration](#customapiregistration)
   - [Custom Data Provider Registration](#customdataproviderregistration)
   - [Workflow Registration](#workflowregistration)
-  - [Managed Identity Registration](#managedidentityregistration)
 - [API Reference](#api-reference)
   - [Attributes](#attributes)
   - [Enums](#enums)
@@ -203,25 +202,6 @@ public class SampleWorkflow : CodeActivity
 
 ---
 
-### ManagedIdentityRegistration
-
-Use `[ManagedIdentityRegistration]` at **assembly level** to associate a managed identity with the plugin assembly or package. Applied once per assembly.
-
-> **Note:** This attribute only handles the Dataverse-side registration. You still need to set up the managed identity in Azure and sign the assembly/package. See [Microsoft Managed Identity overview](https://learn.microsoft.com/en-us/power-platform/admin/managed-identity-overview).
-
-| Parameter | Type | Default | Description |
-|---|---|---|---|
-| `clientId` | `string` | — | Client ID of the managed identity |
-| `TenantId` | `string` | `null` | Tenant ID; defaults to the current tenant if not set |
-
-```csharp
-using Digitall.Plugins.Registration;
-
-[assembly: ManagedIdentityRegistration("00000000-0000-0000-0000-000000000000")]
-```
-
----
-
 ## API Reference
 
 ### Attributes
@@ -232,7 +212,6 @@ using Digitall.Plugins.Registration;
 | `CustomApiRegistrationAttribute` | `class` | ✅ | Registers a Custom API handler |
 | `CustomDataProviderRegistrationAttribute` | `class` | ✅ | Declares a provider operation handler keyed by its data-source configuration table |
 | `WorkflowRegistrationAttribute` | `class` | ❌ | Registers a workflow activity |
-| `ManagedIdentityRegistrationAttribute` | `assembly` | ❌ | Associates a managed identity with the assembly |
 
 ### Enums
 
