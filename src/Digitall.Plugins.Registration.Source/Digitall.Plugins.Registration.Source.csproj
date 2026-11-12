@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="../Digitall.Plugins.Registration/*.cs" Pack="true" PackagePath="contentFiles/cs/any/">
+    <Content Include="../Digitall.Plugins.Registration/*.cs" Pack="true" PackagePath="contentFiles/cs/any/Digitall.Plugins.Registration/">
       <BuildAction>Compile</BuildAction>
       <PackageCopyToOutput>false</PackageCopyToOutput>
     </Content>
