@@ -24,13 +24,13 @@ Do not resolve a `main`-to-`beta` sync by merging beta changes into `main`, forc
 1. Analyzes commit messages since last release (Conventional Commits)
 2. Determines version bump from commit types (see AGENTS.md)
 3. Generates release notes and updates `CHANGELOG.md` (auto-generated — **never edit manually**)
-4. Builds and pushes both NuGet packages to nuget.org using the same semantic-release version:
-   - `Digitall.Plugins.Registration` (including symbols, `includeSymbols: true`)
-   - `Digitall.Plugins.Registration.Source` (source files, no binary output)
+4. Packs and pushes both NuGet packages to nuget.org using the same semantic-release version:
+   - `Digitall.Plugins.Registration` (including symbols)
+   - `Digitall.Plugins.Registration.Source` (source files, no binary or symbol output)
 5. Creates a GitHub Release + tag
 6. Commits `CHANGELOG.md` back with `chore(release): X.Y.Z [skip ci]`
 
-The `projectPath` option in `package.json` is an array containing both project files. The NuGet release plugin packs and publishes each project with the version selected for that release.
+The NuGet release plugin packs the binary project with symbols. The `@semantic-release/exec` prepare command packs the source project without symbols into the same `out` directory. The NuGet plugin then publishes both `.nupkg` files with the version selected for that release. `includeSymbols` must not be applied to the source-only project because NuGet fails while trying to create an empty `.snupkg`.
 
 ## Required secrets (GitHub repository settings)
 
