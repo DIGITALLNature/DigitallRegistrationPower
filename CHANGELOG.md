@@ -1,3 +1,10 @@
+# [3.0.0-beta.6](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v3.0.0-beta.5...v3.0.0-beta.6) (2026-11-12)
+
+
+### Bug Fixes
+
+* group source package files in virtual folder ([#19](https://github.com/DIGITALLNature/DigitallRegistrationPower/issues/19)) ([80c491d](https://github.com/DIGITALLNature/DigitallRegistrationPower/commit/80c491deab33bab7026717d203f229611e000d80))
+
 # [3.0.0-beta.5](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v3.0.0-beta.4...v3.0.0-beta.5) (2026-11-12)
 
 
