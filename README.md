@@ -51,6 +51,8 @@ The source package compiles the attribute source files into your plugin assembly
 dotnet add package Digitall.Plugins.Registration.Source
 ```
 
+The source files appear under the virtual `Digitall.Plugins.Registration` folder in the consuming project. They remain in the NuGet package cache and are not copied into the project directory.
+
 For a project in a subdirectory:
 
 ```bash
