@@ -1,3 +1,15 @@
+# [3.0.0-beta.5](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v3.0.0-beta.4...v3.0.0-beta.5) (2026-11-12)
+
+
+### Bug Fixes
+
+* **release:** pack source package without symbols ([#18](https://github.com/DIGITALLNature/DigitallRegistrationPower/issues/18)) ([3d8b6eb](https://github.com/DIGITALLNature/DigitallRegistrationPower/commit/3d8b6eb07fdab246fe28760ec6d32ebb266877dd))
+
+
+### Features
+
+* publish registration source package ([#17](https://github.com/DIGITALLNature/DigitallRegistrationPower/issues/17)) ([51fcf04](https://github.com/DIGITALLNature/DigitallRegistrationPower/commit/51fcf049e988063994f070575d59cfbfe57007fa))
+
 # [3.0.0-beta.4](https://github.com/DIGITALLNature/DigitallRegistrationPower/compare/v3.0.0-beta.3...v3.0.0-beta.4) (2026-10-26)
 
 
