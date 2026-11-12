@@ -37,14 +37,32 @@ NuGet package providing C# attributes for automated registration of Microsoft Da
 
 ## Installation
 
+Choose one package depending on how you want the registration attributes to be delivered.
+
+The binary package adds a reference to `Digitall.Plugins.Registration.dll`:
+
 ```bash
 dotnet add package Digitall.Plugins.Registration
+```
+
+The source package compiles the attribute source files into your plugin assembly instead:
+
+```bash
+dotnet add package Digitall.Plugins.Registration.Source
 ```
 
 For a project in a subdirectory:
 
 ```bash
 dotnet add src/MyProject package Digitall.Plugins.Registration
+```
+
+Do not install both packages in the same project: both provide the same fully qualified types, which would cause duplicate type definitions. The source package targets .NET Standard 2.0 or higher and requires a C# 6.0-or-newer compiler. It only uses framework types and does not require a Dataverse SDK reference to compile the attributes.
+
+If you repack the source package through another NuGet package, mark its package reference private so downstream consumers do not receive the source package transitively:
+
+```xml
+<PackageReference Include="Digitall.Plugins.Registration.Source" Version="x.y.z" PrivateAssets="all" />
 ```
 
 ---
