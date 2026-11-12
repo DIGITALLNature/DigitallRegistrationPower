@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Digitall.Plugins.Registration.Source</PackageId>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/DIGITALLNature/DigitallRegistrationPower</PackageProjectUrl>
+    <Description>This package provides the registration attributes as source files compiled into the consuming assembly.</Description>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="../Digitall.Plugins.Registration/*.cs" Pack="true" PackagePath="contentFiles/cs/any/Digitall.Plugins.Registration/">
+      <BuildAction>Compile</BuildAction>
+      <PackageCopyToOutput>false</PackageCopyToOutput>
+    </Content>
+    <None Include="../../README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+</Project>

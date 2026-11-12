@@ -1,12 +1,13 @@
 {
   "devDependencies": {
-    "@commitlint/cli": "^21.0.2",
-    "@commitlint/config-conventional": "^21.0.2",
-    "@droidsolutions-oss/semantic-release-nuget": "^2.1.0",
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "@droidsolutions-oss/semantic-release-nuget": "^2.1.2",
     "@semantic-release/changelog": "github:semantic-release/changelog",
+    "@semantic-release/exec": "^7.1.0",
     "@semantic-release/git": "github:semantic-release/git",
     "husky": "^9.1.7",
-    "semantic-release": "^25.0.3"
+    "semantic-release": "^25.0.9"
   },
   "release": {
     "branches": [
@@ -20,7 +21,20 @@
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
-      "@droidsolutions-oss/semantic-release-nuget",
+      [
+        "@droidsolutions-oss/semantic-release-nuget",
+        {
+          "includeSymbols": true,
+          "projectPath": "src/Digitall.Plugins.Registration/Digitall.Plugins.Registration.csproj",
+          "usePackageVersion": true
+        }
+      ],
+      [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "dotnet pack src/Digitall.Plugins.Registration.Source/Digitall.Plugins.Registration.Source.csproj -c Release -o out --no-restore -p:PackageVersion=${nextRelease.version}"
+        }
+      ],
       [
         "@semantic-release/git",
         {
@@ -31,11 +45,7 @@
         }
       ],
       "@semantic-release/github"
-    ],
-    "includeSymbols": true,
-    "projectPath": "src/Digitall.Plugins.Registration/Digitall.Plugins.Registration.csproj",
-    "npmPublish": false,
-    "usePackageVersion": true
+    ]
   },
   "scripts": {
     "prepare": "husky"

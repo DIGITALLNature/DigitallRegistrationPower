@@ -13,14 +13,24 @@ A release is created automatically when a push lands on `main` or `beta` **and**
 - `main` → stable release (e.g. `1.2.0`)
 - `beta` → pre-release (e.g. `1.2.0-beta.1`)
 
+## Keep release branches aligned
+
+Semantic-release can only use release tags reachable from the branch being released. After a stable release on `main`, merge `main` into `beta` through a PR so the stable release commit and tag are part of beta's history before its next release. Resolve generated `CHANGELOG.md` conflicts by retaining both branches' release entries, and keep the beta README/API documentation consistent with beta's code.
+
+Do not resolve a `main`-to-`beta` sync by merging beta changes into `main`, force-pushing either release branch, or moving published tags. If the sync PR has conflicts, create a branch from `beta`, merge `main` into it, resolve the conflicts, then open a PR back to `beta`.
+
 ## What semantic-release does
 
 1. Analyzes commit messages since last release (Conventional Commits)
 2. Determines version bump from commit types (see AGENTS.md)
 3. Generates release notes and updates `CHANGELOG.md` (auto-generated — **never edit manually**)
-4. Builds and pushes the NuGet package to nuget.org (including symbols, `includeSymbols: true`)
+4. Packs and pushes both NuGet packages to nuget.org using the same semantic-release version:
+   - `Digitall.Plugins.Registration` (including symbols)
+   - `Digitall.Plugins.Registration.Source` (source files, no binary or symbol output)
 5. Creates a GitHub Release + tag
 6. Commits `CHANGELOG.md` back with `chore(release): X.Y.Z [skip ci]`
+
+The NuGet release plugin packs the binary project with symbols. The `@semantic-release/exec` prepare command packs the source project without symbols into the same `out` directory. The NuGet plugin then publishes both `.nupkg` files with the version selected for that release. `includeSymbols` must not be applied to the source-only project because NuGet fails while trying to create an empty `.snupkg`.
 
 ## Required secrets (GitHub repository settings)
 
