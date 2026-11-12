@@ -14,7 +14,8 @@ A lightweight `.NET Standard 2.0` NuGet package providing C# attributes for anno
 ```
 DigitallRegistrationPower/
 ├── src/
-│   └── Digitall.Plugins.Registration/       ← single project (formerly dgt.registration)
+│   ├── Digitall.Plugins.Registration/        ← binary NuGet package (formerly dgt.registration)
+│   └── Digitall.Plugins.Registration.Source/ ← source-only NuGet package
 │       ├── Digitall.Plugins.Registration.csproj
 │       ├── PluginRegistrationAttribute.cs
 │       ├── CustomApiRegistrationAttribute.cs
@@ -26,7 +27,7 @@ DigitallRegistrationPower/
 ├── Digitall.Plugins.Registration.slnx
 ├── AGENTS.md                                 ← agent rules, code conventions, commit format
 ├── README.md                                 ← public docs, included as NuGet PackageReadme
-├── package.json                              ← semantic-release + commitlint config
+├── package.json                              ← semantic-release publishes both NuGet packages + commitlint config
 └── .github/workflows/
     ├── build.yml                             ← CI build + semantic-release
     ├── codeql.yml
@@ -41,7 +42,8 @@ DigitallRegistrationPower/
 | Commit format and version bump rules | `AGENTS.md` → Commit Messages |
 | Documentation update rules | `AGENTS.md` → Documentation Maintenance |
 | Public API reference | `README.md` |
-| Release pipeline, secrets, signing | `.memory/guide-release-process.md` |
+| Release pipeline, secrets, signing, multi-package publishing | `.memory/guide-release-process.md` |
+| Source package layout and release versioning | `.memory/decision-source-only-nuget-package.md` |
 | How to add a new attribute | `.memory/guide-adding-attributes.md` |
 | Non-obvious C# / build caveats | `.memory/research-project-conventions.md` |
 | Rename decision (dgt.registration → Digitall.Plugins.Registration) | `.memory/decision-rename-namespace.md` |
